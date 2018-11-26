@@ -10,6 +10,17 @@ angular.module('myApp.view2', ['ngRoute'])
 }])
 
 .controller('View2Ctrl', ['$scope', '$location', function($scope, $location) {
-    var searchString = $location.search().query;
-    console.log(searchString);
+    
+  $scope.searchInput = $location.search().query;
+  $scope.searchResults = [];
+
+  // Temp
+  $scope.searchResults = Array.apply(null, Array(20)).map(Number.prototype.valueOf,0);
+  console.log($scope.searchResults);
+
+    $scope.goToHomePage = goToHomePage;
+
+    function goToHomePage() {
+      $location.path('/').search('query', null);
+    }
 }]);

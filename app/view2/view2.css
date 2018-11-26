@@ -1,0 +1,51 @@
+.search-results-container .search-header {
+    padding: 10px 25px;
+}
+.search-header .logo {
+    width: 200px;
+    cursor: pointer;
+}
+.search-header .input {
+    width: 35%;
+    max-width: 425px;
+    display: initial;
+}
+.search-header .submit {
+    margin-top: -5px;
+}
+
+.search-results-container .inner {
+    padding: 10px 50px;
+}
+.search-results-container .search-filter {
+    float: left;
+    width: 150px;
+    height: 200px;
+}
+.search-filter .filter {
+    margin: 15px 0;
+}
+.filter .title {
+    font-size: 120%;
+    margin-bottom: 5px;
+}
+
+.search-results-container .search-results {
+    float: left;
+    width: 600px;
+    padding: 0 25px 50px 25px;
+}
+.search-results .result {
+    margin: 15px 0;
+}
+.result .username, .result .target-url {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.pagination {
+    color: blue;
+    margin-top: 15px;
+    padding-left: 150px; /* Temp */
+}
