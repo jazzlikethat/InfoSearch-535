@@ -9,6 +9,7 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
-
+.controller('View2Ctrl', ['$scope', '$location', function($scope, $location) {
+    var searchString = $location.search().query;
+    console.log(searchString);
 }]);

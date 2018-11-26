@@ -1,1 +1,5 @@
 /* app css stylesheet */
+html,
+body {
+  height: 100%;
+}

@@ -1,0 +1,19 @@
+.home-search-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: 80px;
+    height: 100%;
+    text-align: center;
+}
+
+.home-search-container .inner {
+    width: 75%;
+    margin: auto;
+    max-width: 750px;
+}
+
+.home-search-container .submit-button {
+    margin-top: 50px;
+}
