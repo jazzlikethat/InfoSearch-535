@@ -9,7 +9,7 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$location', function($scope, $location) {
+.controller('View2Ctrl', ['$scope', '$location','$window', function($scope, $location,$window) {
     
   $scope.searchInput = $location.search().query;
   $scope.searchResults = [];
@@ -23,4 +23,21 @@ angular.module('myApp.view2', ['ngRoute'])
     function goToHomePage() {
       $location.path('/').search('query', null);
     }
+    
+    $scope.fetchResultsForQuery = fetchResultsForQuery;
+    function fetchResultsForQuery() {
+        if ($scope.searchInput.trim() === '') {
+          return;
+        }
+        $location.path('/search').search('query', $scope.searchInput);
+      }
+    
+    $scope.showAnalytics = showAnalytics;
+    function showAnalytics() {
+    	
+    	 $location.path('/analysis').search('query', $scope.searchInput);
+       
+      }
+    
+    
 }]);

@@ -3,8 +3,8 @@
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    padding-bottom: 80px;
-    height: 100%;
+    margin-top:150px;
+    height: auto;
     text-align: center;
 }
 
@@ -16,4 +16,12 @@
 
 .home-search-container .submit-button {
     margin-top: 50px;
+}
+.page-footer{
+    position: fixed;
+    bottom: 0;
+    background: #e0e2e4;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
 }

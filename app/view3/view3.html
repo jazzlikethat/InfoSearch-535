@@ -1,0 +1,39 @@
+  <div class="search-header">
+        <img class="logo" src="assets/InfoSearch_Logo.JPG" alt="" ng-click="goToHomePage()">
+        <input type="text" class="form-control input" aria-label="Search input" ng-model="searchInput" required>
+        <button class="btn btn-primary submit" type="button" ng-click="fetchResultsForQuery()">Search</button>
+    </div>
+    <div class="content row">
+    <div class="col-lg-6">  <div id="chart_div" style="width:500px; height: 900px;"></div></div>
+    
+     
+    </div>
+ 
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Language', 'Number'],
+        ['ru', 1000],
+        ['en', 1170],
+        ['th', 660],
+        ['es', 1030],
+        ['hi', 1030],
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Number of tweets for the given query in different languages',
+          subtitle: 'English, French,Thai, Hindi,Spanish',
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('chart_div'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>

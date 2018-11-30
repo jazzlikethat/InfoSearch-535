@@ -1,66 +1,70 @@
-<div class="search-results-container">
+
     <div class="search-header">
         <img class="logo" src="assets/InfoSearch_Logo.JPG" alt="" ng-click="goToHomePage()">
         <input type="text" class="form-control input" aria-label="Search input" ng-model="searchInput" required>
         <button class="btn btn-primary submit" type="button" ng-click="fetchResultsForQuery()">Search</button>
     </div>
-    <div class="inner">
-        <div class="search-filter">
-            <div class="filter" ng-class="{'expand': expandFilter}">
-                <div class="title">Filter #1</div>
-                <div class="entries">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                                checkbox
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                        <label class="form-check-label" for="defaultCheck2">
-                                checkbox
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="filter" ng-class="{'expand': expandFilter}">
-                <div class="title">Filter #2</div>
-                <div class="entries">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                        <label class="form-check-label" for="defaultCheck3">
-                                checkbox
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                        <label class="form-check-label" for="defaultCheck4">
-                                checkbox
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="search-results">
-            <div class="result" ng-repeat="result in searchResults track by $index">
-                <div class="username">@Username</div>
-                <div class="target-url">www.url-to-the-tweet.com</div>
-                <div class="text">The text that is present with in the tweet will be shown here. Some tweets are short. Some tweets are long, with a maximum of three to four lines here. We can either choose to show the complete tweet or partial tweet.</div>
-            </div>
-            
-            <div class="pagination">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link">Previous</a></li>
-                        <li class="page-item"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                        <li class="page-item"><a class="page-link">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-
+   
+    <div class="content row">
+	    <div class="col-lg-2">     
+	    		<div class="filter" ng-class="{'expand': expandFilter}">
+	                <div class="title">Filter #1</div>
+	                <div class="entries">
+	                    <div class="form-check">
+	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+	                        <label class="form-check-label" for="defaultCheck1">
+	                                checkbox
+	                        </label>
+	                    </div>
+	                    <div class="form-check">
+	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+	                        <label class="form-check-label" for="defaultCheck2">
+	                                checkbox
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="filter" ng-class="{'expand': expandFilter}">
+	                <div class="title">Filter #1</div>
+	                <div class="entries">
+	                    <div class="form-check">
+	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+	                        <label class="form-check-label" for="defaultCheck1">
+	                                checkbox
+	                        </label>
+	                    </div>
+	                    <div class="form-check">
+	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+	                        <label class="form-check-label" for="defaultCheck2">
+	                                checkbox
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	         </div>
+	     <div class=" col-lg-5"> 
+	    		<div class="result" ng-repeat="result in searchResults track by $index">
+	                <div class="username">@Username</div>
+	                <div class="target-url">www.url-to-the-tweet.com</div>
+	                <div class="text">The text that is present with in the tweet will be shown here. Some tweets are short. Some tweets are long, with a maximum of three to four lines here. We can either choose to show the complete tweet or partial tweet.</div>
+	            </div>
+	        </div>
+     <div class="col-lg-5">     
+	     <div class="card" >	  
+			  <div class=" row card-body">		 
+				  <div class="col-lg-5">			 
+					    <h5 class="card-title">Analytics</h5>
+					    <ul class="card-text">
+					    <li>Patterns</li>
+					    <li>Trends</li>
+					    <li>Correlations</li></ul>
+					 
+					     <button class="btn btn-primary submit" type="button" ng-click="showAnalytics()">Show Analysis</button>
+					  		    
+				     </div>
+			      <img class="col-lg-7 " src="assets/visualization.png" alt="Card image cap">
+			  </div>
+		 </div>
+         </div>
     </div>
-</div>
+
