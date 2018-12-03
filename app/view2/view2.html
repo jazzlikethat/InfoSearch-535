@@ -44,9 +44,9 @@
 	         </div>
 	     <div class=" col-lg-5"> 
 	    		<div class="result" ng-repeat="result in searchResults track by $index">
-	                <div class="username">@Username</div>
-	                <div class="target-url">www.url-to-the-tweet.com</div>
-	                <div class="text">The text that is present with in the tweet will be shown here. Some tweets are short. Some tweets are long, with a maximum of three to four lines here. We can either choose to show the complete tweet or partial tweet.</div>
+	                <div class="username">@{{result.user.screen_name}}</div>
+	                <div class="target-url" ng-click="openUrl(result.entities.urls[0].url)">{{result.entities.urls[0].url}}</div>
+	                <div class="text">{{result.text}}</div>
 	            </div>
 	        </div>
      <div class="col-lg-5">     

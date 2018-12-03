@@ -31,22 +31,22 @@
     margin-left: -10%;
 }
 .result .username  {
-    cursor: pointer;
     color: #1a0dab;
     font-size:18px;
     font-weight:450;
     
 }
 .result .target-url {
-color:#006621;
-font-size:14px;
+    color:#006621;
+    font-size:14px;
+    cursor: pointer;
 }
 
 
 .result .text {
-color:#545454;
-font-size: small;
-margin-bottom: 4%;
+    color:#545454;
+    font-size: small;
+    margin-bottom: 4%;
 }
 
 .pagination {

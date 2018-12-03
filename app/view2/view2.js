@@ -9,16 +9,24 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$location','$window', function($scope, $location,$window) {
-    
-  $scope.searchInput = $location.search().query;
-  $scope.searchResults = [];
-
-  // Temp
-  $scope.searchResults = Array.apply(null, Array(20)).map(Number.prototype.valueOf,0);
+.controller('View2Ctrl', ['$scope', '$location', '$window', '$http', function($scope, $location, $window, $http) {
+    $scope.searchInput = $location.search().query;
+    $scope.searchResults = [];
 
     $scope.goToHomePage = goToHomePage;
     $scope.showAnalytics = showAnalytics;
+    $scope.openUrl = openUrl;
+
+    // Temp
+    // Fetch raw tweets from a local file
+    $http({
+      url: "./raw_tweets.json",
+      method: "GET",
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(function(response){
+      $scope.searchResults = response.data;
+    });
 
     function goToHomePage() {
       $location.path('/').search('query', null);
@@ -26,6 +34,10 @@ angular.module('myApp.view2', ['ngRoute'])
     
     function showAnalytics() {
     	$location.path('/analysis').search('query', $scope.searchInput);
+    }
+
+    function openUrl(url) {
+      $window.open(url, '_blank');
     }
     
 }]);
