@@ -9,7 +9,7 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$location', '$window', '$http', 'PagerService', function($scope, $location, $window, $http, PagerService) {
+.controller('View2Ctrl', ['$scope', '$location', '$window', '$http', 'PagerService', 'sharedData', function($scope, $location, $window, $http, PagerService, sharedData) {
     
     $scope.searchInput = $location.search().query;
     $scope.searchResults = [];
@@ -32,6 +32,8 @@ angular.module('myApp.view2', ['ngRoute'])
       })
       .then(function(response){
         $scope.searchResults = response.data.response.docs;
+        sharedData.searchInput = $scope.searchInput;
+        sharedData.searchResults = $scope.searchResults;
         $scope.setPage(1);
       });
     }

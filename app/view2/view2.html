@@ -45,11 +45,13 @@
 		<div class="result" ng-repeat="result in slicedResults track by $index">
 			<div class="username">@{{result["user.screen_name"][0]}}</div>
 			<div class="target-url" ng-click="openUrl(result)">{{result["entities.urls.url"][0]}}</div>
-			<div class="text">{{result.text_en}}</div>
-			<div class="text">{{result.text_th}}</div>
-			<div class="text">{{result.text_hi}}</div>
-			<div class="text">{{result.text_es}}</div>
-			<div class="text">{{result.text_fr}}</div>
+			<div class="text">
+				{{result.text_en}}
+				{{result.text_th}}
+				{{result.text_hi}}
+				{{result.text_es}}
+				{{result.text_fr}}
+			</div>
 		</div>
 		<ul ng-if="pager.pages.length" class="pagination">
 			<li class="page-item" ng-class="{disabled:pager.currentPage === 1}">

@@ -9,12 +9,36 @@ angular.module('myApp.view3', ['ngRoute'])
   });
 }])
 
-.controller('View3Ctrl', ['$scope', '$location', function($scope, $location) {
+.controller('View3Ctrl', ['$scope', '$location', 'sharedData', function($scope, $location, sharedData) {
     
-	    $scope.searchInput = $location.search().query;
+      $scope.searchInput = sharedData.searchInput;
+      $scope.searchResults = sharedData.searchResults;
+
+      if ($scope.searchResults.length === 0){
+        goToHomePage();
+        return;
+      }
 
 	    $scope.goToHomePage = goToHomePage;
-			$scope.goToSearchPage = goToSearchPage;
+      $scope.goToSearchPage = goToSearchPage;
+      
+      // Temporary
+      var counter = {
+        "nyc": 0,
+        "bangkok": 0,
+        "delhi": 0,
+        "paris": 0,
+        "mexico city": 0
+      };
+      processSearchResults($scope.searchResults);
+      // Process searchResults
+      function processSearchResults(results) {
+        for (var i = 0; i < results.length; i++) {
+          var city = results[0].city;
+          counter[city] += 1;
+        }
+        console.log(counter);
+      }
 
 	    function goToHomePage() {
 	      $location.path('/').search('query', null);
@@ -40,18 +64,18 @@ angular.module('myApp.view3', ['ngRoute'])
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'City');
+        data.addColumn('number', 'Tweet Count');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ["nyc", counter["nyc"]],
+          ["bangkok", counter["bangkok"]],
+          ["delhi", counter["delhi"]],
+          ["paris", counter["paris"]],
+          ["mexico city", counter["mexico city"]]
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':'Distribution of tweets by city',
                        'width':400,
                        'height':300};
 
