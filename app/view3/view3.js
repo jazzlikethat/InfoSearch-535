@@ -11,11 +11,7 @@ angular.module('myApp.view3', ['ngRoute'])
 
 .controller('View3Ctrl', ['$scope', '$location', function($scope, $location) {
     
-	  $scope.searchInput = $location.search().query;
-	  $scope.searchResults = [];
-
-	  // Temp
-	  $scope.searchResults = Array.apply(null, Array(20)).map(Number.prototype.valueOf,0);
+	    $scope.searchInput = $location.search().query;
 
 	    $scope.goToHomePage = goToHomePage;
 			$scope.goToSearchPage = goToSearchPage;

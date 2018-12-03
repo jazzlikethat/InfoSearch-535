@@ -9,24 +9,32 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$location', '$window', '$http', function($scope, $location, $window, $http) {
+.controller('View2Ctrl', ['$scope', '$location', '$window', '$http', 'PagerService', function($scope, $location, $window, $http, PagerService) {
+    
     $scope.searchInput = $location.search().query;
     $scope.searchResults = [];
-
+    $scope.slicedResults = [];
+    $scope.pager = {};
+    
     $scope.goToHomePage = goToHomePage;
     $scope.showAnalytics = showAnalytics;
     $scope.openUrl = openUrl;
+    $scope.setPage = setPage;
 
-    // Temp
-    // Fetch raw tweets from a local file
-    $http({
-      url: "./raw_tweets.json",
-      method: "GET",
-      headers: {"Content-Type": "application/json"}
-    })
-    .then(function(response){
-      $scope.searchResults = response.data;
-    });
+    // On load
+    fetchTweets();
+
+    function fetchTweets(){
+      $http({
+        url: "http://127.0.0.1:5000/query/" + $scope.searchInput,
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+      })
+      .then(function(response){
+        $scope.searchResults = response.data.response.docs;
+        $scope.setPage(1);
+      });
+    }
 
     function goToHomePage() {
       $location.path('/').search('query', null);
@@ -36,8 +44,23 @@ angular.module('myApp.view2', ['ngRoute'])
     	$location.path('/analysis').search('query', $scope.searchInput);
     }
 
-    function openUrl(url) {
+    function openUrl(tweet) {
+      var url = tweet["entities.urls.url"][0];
       $window.open(url, '_blank');
+    }
+
+    function setPage(page) {
+      if (page < 1 || page === $scope.pager.currentPage || page > $scope.pager.totalPages) {
+          return;
+      }
+
+      // get pager object from service
+      $scope.pager = PagerService.GetPager($scope.searchResults.length, page);
+
+      // get current page of items
+      $scope.slicedResults = $scope.searchResults.slice($scope.pager.startIndex, $scope.pager.endIndex + 1);
+      
+      $window.scrollTo(0, 0);
     }
     
 }]);

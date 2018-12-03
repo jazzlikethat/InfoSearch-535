@@ -1,70 +1,88 @@
+<div class="search-header">
+	<img class="logo" src="assets/InfoSearch_Logo.JPG" alt="" ng-click="goToHomePage()">
+	<input type="text" class="form-control input" aria-label="Search input" ng-model="searchInput" required>
+	<button class="btn btn-primary submit" type="button" ng-click="fetchResultsForQuery()">Search</button>
+</div>
 
-    <div class="search-header">
-        <img class="logo" src="assets/InfoSearch_Logo.JPG" alt="" ng-click="goToHomePage()">
-        <input type="text" class="form-control input" aria-label="Search input" ng-model="searchInput" required>
-        <button class="btn btn-primary submit" type="button" ng-click="fetchResultsForQuery()">Search</button>
-    </div>
-   
-    <div class="content row">
-	    <div class="col-lg-2">     
-	    		<div class="filter" ng-class="{'expand': expandFilter}">
-	                <div class="title">Filter #1</div>
-	                <div class="entries">
-	                    <div class="form-check">
-	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-	                        <label class="form-check-label" for="defaultCheck1">
-	                                checkbox
-	                        </label>
-	                    </div>
-	                    <div class="form-check">
-	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-	                        <label class="form-check-label" for="defaultCheck2">
-	                                checkbox
-	                        </label>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="filter" ng-class="{'expand': expandFilter}">
-	                <div class="title">Filter #1</div>
-	                <div class="entries">
-	                    <div class="form-check">
-	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-	                        <label class="form-check-label" for="defaultCheck1">
-	                                checkbox
-	                        </label>
-	                    </div>
-	                    <div class="form-check">
-	                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-	                        <label class="form-check-label" for="defaultCheck2">
-	                                checkbox
-	                        </label>
-	                    </div>
-	                </div>
-	            </div>
-	         </div>
-	     <div class=" col-lg-5"> 
-	    		<div class="result" ng-repeat="result in searchResults track by $index">
-	                <div class="username">@{{result.user.screen_name}}</div>
-	                <div class="target-url" ng-click="openUrl(result.entities.urls[0].url)">{{result.entities.urls[0].url}}</div>
-	                <div class="text">{{result.text}}</div>
-	            </div>
-	        </div>
-     <div class="col-lg-5">     
-	     <div class="card" >	  
-			  <div class=" row card-body">		 
-				  <div class="col-lg-5">			 
-					    <h5 class="card-title">Analytics</h5>
-					    <ul class="card-text">
-					    <li>Patterns</li>
-					    <li>Trends</li>
-					    <li>Correlations</li></ul>
-					 
-					     <button class="btn btn-primary submit" type="button" ng-click="showAnalytics()">Show Analysis</button>
-					  		    
-				     </div>
-			      <img class="col-lg-7 " src="assets/visualization.png" alt="Card image cap">
-			  </div>
-		 </div>
-         </div>
-    </div>
-
+<div class="content row">
+	<div class="col-lg-2">
+		<div class="filter" ng-class="{'expand': expandFilter}">
+			<div class="title">Filter #1</div>
+			<div class="entries">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+					<label class="form-check-label" for="defaultCheck1">
+						checkbox
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+					<label class="form-check-label" for="defaultCheck2">
+						checkbox
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="filter" ng-class="{'expand': expandFilter}">
+			<div class="title">Filter #1</div>
+			<div class="entries">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+					<label class="form-check-label" for="defaultCheck1">
+						checkbox
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+					<label class="form-check-label" for="defaultCheck2">
+						checkbox
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class=" col-lg-5">
+		<div class="result" ng-repeat="result in slicedResults track by $index">
+			<div class="username">@{{result["user.screen_name"][0]}}</div>
+			<div class="target-url" ng-click="openUrl(result)">{{result["entities.urls.url"][0]}}</div>
+			<div class="text">{{result.text_en}}</div>
+			<div class="text">{{result.text_th}}</div>
+			<div class="text">{{result.text_hi}}</div>
+			<div class="text">{{result.text_es}}</div>
+			<div class="text">{{result.text_fr}}</div>
+		</div>
+		<ul ng-if="pager.pages.length" class="pagination">
+			<li class="page-item" ng-class="{disabled:pager.currentPage === 1}">
+				<a class="page-link" ng-click="setPage(1)">First</a>
+			</li>
+			<li class="page-item" ng-class="{disabled:pager.currentPage === 1}">
+				<a class="page-link" ng-click="setPage(pager.currentPage - 1)">Previous</a>
+			</li>
+			<li class="page-item" ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+				<a class="page-link" ng-click="setPage(page)">{{page}}</a>
+			</li>
+			<li class="page-item" ng-class="{disabled:pager.currentPage === pager.totalPages}">
+				<a class="page-link" ng-click="setPage(pager.currentPage + 1)">Next</a>
+			</li>
+			<li class="page-item" ng-class="{disabled:pager.currentPage === pager.totalPages}">
+				<a class="page-link" ng-click="setPage(pager.totalPages)">Last</a>
+			</li>
+		</ul>
+	</div>
+	<div class="col-lg-5">
+		<div class="card">
+			<div class=" row card-body">
+				<div class="col-lg-5">
+					<h5 class="card-title">Analytics</h5>
+					<ul class="card-text">
+						<li>Patterns</li>
+						<li>Trends</li>
+						<li>Correlations</li>
+					</ul>
+					<button class="btn btn-primary submit" type="button" ng-click="showAnalytics()">Show Analysis</button>
+				</div>
+				<img class="col-lg-7 " src="assets/visualization.png" alt="Card image cap">
+			</div>
+		</div>
+	</div>
+</div>
