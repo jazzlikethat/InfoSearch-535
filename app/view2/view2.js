@@ -26,7 +26,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
     function fetchTweets(){
       $http({
-        url: "http://ec2-18-221-192-215.us-east-2.compute.amazonaws.com:8000/query/" + $scope.searchInput,
+        url: "http://ec2-18-224-37-167.us-east-2.compute.amazonaws.com:5000/query/" + $scope.searchInput,
         method: "GET",
         headers: {"Content-Type": "application/json"}
       })
