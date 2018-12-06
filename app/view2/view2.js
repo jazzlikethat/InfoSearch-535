@@ -17,6 +17,7 @@ angular.module('myApp.view2', ['ngRoute'])
     $scope.pager = {};
     
     $scope.goToHomePage = goToHomePage;
+    $scope.fetchResultsForQuery = fetchTweets;
     $scope.showAnalytics = showAnalytics;
     $scope.openUrl = openUrl;
     $scope.setPage = setPage;
@@ -26,12 +27,21 @@ angular.module('myApp.view2', ['ngRoute'])
 
     function fetchTweets(){
       $http({
-        url: "http://ec2-18-224-37-167.us-east-2.compute.amazonaws.com:5000/query/" + $scope.searchInput,
+        url: "http://localhost:5000/query/" + $scope.searchInput,
         method: "GET",
         headers: {"Content-Type": "application/json"}
       })
       .then(function(response){
-        $scope.searchResults = response.data.response.docs;
+        $scope.searchResults = response.data;
+
+        for (var i = 0; i < $scope.searchResults.tweets.length; i++) {
+          var entry = $scope.searchResults.tweets[i];
+          var text = entry['text_' + entry.language_s];
+          if (Array.isArray(text)) {
+            $scope.searchResults.tweets[i]['text' + entry.language_s] = text[0];
+          }
+        }
+
         sharedData.searchInput = $scope.searchInput;
         sharedData.searchResults = $scope.searchResults;
         $scope.setPage(1);
@@ -57,10 +67,10 @@ angular.module('myApp.view2', ['ngRoute'])
       }
 
       // get pager object from service
-      $scope.pager = PagerService.GetPager($scope.searchResults.length, page);
+      $scope.pager = PagerService.GetPager($scope.searchResults.tweets.length, page);
 
       // get current page of items
-      $scope.slicedResults = $scope.searchResults.slice($scope.pager.startIndex, $scope.pager.endIndex + 1);
+      $scope.slicedResults = $scope.searchResults.tweets.slice($scope.pager.startIndex, $scope.pager.endIndex + 1);
       
       $window.scrollTo(0, 0);
     }

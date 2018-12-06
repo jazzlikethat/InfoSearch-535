@@ -21,24 +21,6 @@ angular.module('myApp.view3', ['ngRoute'])
 
 	    $scope.goToHomePage = goToHomePage;
       $scope.goToSearchPage = goToSearchPage;
-      
-      // Temporary
-      var counter = {
-        "nyc": 0,
-        "bangkok": 0,
-        "delhi": 0,
-        "paris": 0,
-        "mexico city": 0
-      };
-      processSearchResults($scope.searchResults);
-      // Process searchResults
-      function processSearchResults(results) {
-        for (var i = 0; i < results.length; i++) {
-          var city = results[0].city;
-          counter[city] += 1;
-        }
-        console.log(counter);
-      }
 
 	    function goToHomePage() {
 	      $location.path('/').search('query', null);
@@ -51,36 +33,53 @@ angular.module('myApp.view3', ['ngRoute'])
 				$location.path('/search').search('query', $scope.searchInput);
 			}
 
-			// Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+      google.charts.load('current', {'packages': ['geochart', 'corechart'], 'mapsApiKey': 'AIzaSyD536BKZ403PLJdOCFgC5Ccx-uuCk16NGo'});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawAllCharts);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+      function drawAllCharts() {
+        drawRegionsMap();
+        drawLanguageBarChart();
+      }
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'City');
-        data.addColumn('number', 'Tweet Count');
-        data.addRows([
-          ["nyc", counter["nyc"]],
-          ["bangkok", counter["bangkok"]],
-          ["delhi", counter["delhi"]],
-          ["paris", counter["paris"]],
-          ["mexico city", counter["mexico city"]]
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Number of Tweets'],
+          ['United States', $scope.searchResults.countries.usa],
+          ['Thailand', $scope.searchResults.countries.thailand],
+          ['France', $scope.searchResults.countries.france],
+          ['India', $scope.searchResults.countries.india],
+          ['Mexico', $scope.searchResults.countries.mexico]
         ]);
 
-        // Set chart options
-        var options = {'title':'Distribution of tweets by city',
-                       'width':400,
-                       'height':300};
+        var options = {};
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.GeoChart(document.getElementById('chart_div1'));
+
+        chart.draw(data, options);
+      }
+
+      function drawLanguageBarChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Language", "Tweets Count"],
+          ["French", $scope.searchResults.languages.fr],
+          ["English", $scope.searchResults.languages.en],
+          ["Hindi", $scope.searchResults.languages.th],
+          ["Thai", $scope.searchResults.languages.hi],
+          ["Spanish", $scope.searchResults.languages.es]
+        ]);
+  
+        var options = {
+          title: 'Distribution of tweets by language',
+          hAxis: {
+            title: 'Total Tweets',
+            minValue: 0
+          },
+          vAxis: {
+            title: 'Language'
+          }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("chart_div2"));
         chart.draw(data, options);
       }
  

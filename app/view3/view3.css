@@ -15,3 +15,10 @@
 .search-header .submit {
     margin-top: -5px;
 }
+
+.chart-styles {
+    width: 450px;
+    height: 250px;
+    display: inline-block;
+    margin: 0 10px;
+}
