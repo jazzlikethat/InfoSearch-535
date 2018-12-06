@@ -28,13 +28,13 @@
 
 
  .result {
-    margin-left: -10%;
+   
 }
 .result .username  {
     color: #1a0dab;
     font-size:18px;
     font-weight:450;
-    
+    cursor: pointer;
 }
 .result .target-url {
     color:#006621;

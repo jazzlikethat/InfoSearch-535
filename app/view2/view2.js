@@ -21,7 +21,7 @@ angular.module('myApp.view2', ['ngRoute'])
     $scope.showAnalytics = showAnalytics;
     $scope.openUrl = openUrl;
     $scope.setPage = setPage;
-
+    $scope.gotoUser = gotoUser;
     // On load
     fetchTweets();
 
@@ -59,6 +59,11 @@ angular.module('myApp.view2', ['ngRoute'])
     function openUrl(tweet) {
       var url = tweet["entities.urls.url"][0];
       $window.open(url, '_blank');
+    }
+	
+	function gotoUser(tweet) {
+      var url = tweet["user.screen_name"][0];
+      $window.open("https://twitter.com/"+url, '_blank');
     }
 
     function setPage(page) {
