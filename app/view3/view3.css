@@ -22,3 +22,7 @@
     display: inline-block;
     margin: 0 10px;
 }
+
+.chart-styles.word-tree {
+    width: 900px;
+}

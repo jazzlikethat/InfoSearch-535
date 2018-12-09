@@ -33,13 +33,14 @@ angular.module('myApp.view3', ['ngRoute'])
 				$location.path('/search').search('query', $scope.searchInput);
 			}
 
-      google.charts.load('current', {'packages': ['geochart', 'corechart'], 'mapsApiKey': 'AIzaSyD536BKZ403PLJdOCFgC5Ccx-uuCk16NGo'});
+      google.charts.load('current', {'packages': ['geochart', 'corechart', 'wordtree'], 'mapsApiKey': 'AIzaSyD536BKZ403PLJdOCFgC5Ccx-uuCk16NGo'});
 
       google.charts.setOnLoadCallback(drawAllCharts);
 
       function drawAllCharts() {
         drawRegionsMap();
         drawLanguageBarChart();
+        drawWordTree();
       }
 
       function drawRegionsMap() {
@@ -80,6 +81,32 @@ angular.module('myApp.view3', ['ngRoute'])
           }
         };
         var chart = new google.visualization.BarChart(document.getElementById("chart_div2"));
+        chart.draw(data, options);
+      }
+
+      function getTextsArray() {
+        var array = [['Phrases']];
+        var tweets = $scope.searchResults.tweets;
+        for (var i = 0; i < tweets.length; i++) {
+          var entry = tweets[i];
+          var text = entry['text_' + entry.tweet_lang];
+          array.push([text]);
+        }
+        return array;
+      }
+
+      function drawWordTree() {
+        var textArray = getTextsArray();
+        var data = google.visualization.arrayToDataTable(textArray);
+
+        var options = {
+          wordtree: {
+            format: 'implicit',
+            word: $scope.searchInput
+          }
+        };
+
+        var chart = new google.visualization.WordTree(document.getElementById('chart_div3'));
         chart.draw(data, options);
       }
  
