@@ -40,7 +40,8 @@ angular.module('myApp.view3', ['ngRoute'])
       function drawAllCharts() {
         drawRegionsMap();
         drawLanguageBarChart();
-        drawWordTree();
+        drawEmotionsChart();
+        // drawWordTree();
       }
 
       function drawRegionsMap() {
@@ -84,6 +85,28 @@ angular.module('myApp.view3', ['ngRoute'])
         chart.draw(data, options);
       }
 
+      function drawEmotionsChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Emotion", "Tweets Count"],
+          ["Negative", $scope.searchResults.sentiments.overall_sentiment.neg],
+          ["Neutral", $scope.searchResults.sentiments.overall_sentiment.neu],
+          ["Positive", $scope.searchResults.sentiments.overall_sentiment.pos]
+        ]);
+
+        var options = {
+          title: 'Distribution of tweets by Emotion',
+          hAxis: {
+            title: 'Total Tweets',
+            minValue: 0
+          },
+          vAxis: {
+            title: 'Emotion'
+          }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("chart_div3"));
+        chart.draw(data, options);
+      }
+
       function getTextsArray() {
         var array = [['Phrases']];
         var tweets = $scope.searchResults.tweets;
@@ -106,7 +129,7 @@ angular.module('myApp.view3', ['ngRoute'])
           }
         };
 
-        var chart = new google.visualization.WordTree(document.getElementById('chart_div3'));
+        var chart = new google.visualization.WordTree(document.getElementById('chart_div4'));
         chart.draw(data, options);
       }
  
