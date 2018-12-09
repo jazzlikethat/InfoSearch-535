@@ -15,6 +15,7 @@ angular.module('myApp.view2', ['ngRoute'])
     $scope.searchResults = [];
     $scope.slicedResults = [];
     $scope.pager = {};
+    $scope.hideSpinner = true;
     
     $scope.goToHomePage = goToHomePage;
     $scope.fetchResultsForQuery = fetchTweets;
@@ -31,6 +32,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
     function fetchTweets(){
       $scope.pager = {};
+      $scope.hideSpinner = false;
       $http({
         url: "http://" + script_ip + ":" + script_port + "/query/" + $scope.searchInput,
         method: "GET",
@@ -41,6 +43,7 @@ angular.module('myApp.view2', ['ngRoute'])
         sharedData.searchInput = $scope.searchInput;
         sharedData.searchResults = $scope.searchResults;
         $scope.setPage(1);
+        $scope.hideSpinner = true;
       });
     }
 
