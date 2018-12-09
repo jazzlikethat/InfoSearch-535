@@ -53,7 +53,7 @@ angular.module('myApp.view2', ['ngRoute'])
     }
 
     function openUrl(tweet) {
-      var url = "https://twitter.com/" + tweet.user_name[0] + "/status/" + tweet.tweet_id[0];
+      var url = "https://twitter.com/" + tweet.user_name[0] + "/status/" + tweet.tweet_id;
       $window.open(url, '_blank');
     }
 	
