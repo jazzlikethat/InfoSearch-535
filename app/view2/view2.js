@@ -23,13 +23,14 @@ angular.module('myApp.view2', ['ngRoute'])
     $scope.setPage = setPage;
     $scope.gotoUser = gotoUser;
 
-    var script_ip = "68.133.35.155";
+    var script_ip = "18.188.21.89";
     var script_port = "5000";
 
     // On load
     fetchTweets();
 
     function fetchTweets(){
+      $scope.pager = {};
       $http({
         url: "http://" + script_ip + ":" + script_port + "/query/" + $scope.searchInput,
         method: "GET",
@@ -37,15 +38,6 @@ angular.module('myApp.view2', ['ngRoute'])
       })
       .then(function(response){
         $scope.searchResults = response.data;
-
-        for (var i = 0; i < $scope.searchResults.tweets.length; i++) {
-          var entry = $scope.searchResults.tweets[i];
-          var text = entry['text_' + entry.language_s];
-          if (Array.isArray(text)) {
-            $scope.searchResults.tweets[i]['text' + entry.language_s] = text[0];
-          }
-        }
-
         sharedData.searchInput = $scope.searchInput;
         sharedData.searchResults = $scope.searchResults;
         $scope.setPage(1);
@@ -65,8 +57,8 @@ angular.module('myApp.view2', ['ngRoute'])
       $window.open(url, '_blank');
     }
 	
-	function gotoUser(tweet) {
-      var url = tweet["user.screen_name"][0];
+	  function gotoUser(tweet) {
+      var url = tweet.user_name[0];
       $window.open("https://twitter.com/"+url, '_blank');
     }
 
