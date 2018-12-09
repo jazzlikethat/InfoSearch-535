@@ -6,45 +6,120 @@
 
 <div class="content row">
 	<div class="col-lg-2">
-		<div class="filter" ng-class="{'expand': expandFilter}">
-			<div class="title">Filter #1</div>
-			<div class="entries">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						checkbox
+		
+		<div id="accordion" class="filter" ng-class="{'expand': expandFilter}">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Language
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+       <div class="entries">
+				<div class="">
+					<input class="radio" type="radio" value="en" name="language">
+					<label >
+						English
 					</label>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-					<label class="form-check-label" for="defaultCheck2">
-						checkbox
+				<div class="">
+					<input class="radio" type="radio" value="hi" name="language">
+					<label >
+						Hindi
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="th" name="language">
+					<label >
+						Thai
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="fr" name="language">
+					<label >
+						French
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="es" name="language">
+					<label >
+						Spanish
 					</label>
 				</div>
 			</div>
-		</div>
-		<div class="filter" ng-class="{'expand': expandFilter}">
-			<div class="title">Filter #1</div>
-			<div class="entries">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						checkbox
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Location
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+       <div class="entries">
+				<div class="">
+					<input class="radio" type="radio" value="en" name="language">
+					<label >
+						New York
 					</label>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-					<label class="form-check-label" for="defaultCheck2">
-						checkbox
+				<div class="">
+					<input class="radio" type="radio" value="hi" name="language">
+					<label >
+						Mexico City
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="th" name="language">
+					<label >
+						Delhi
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="fr" name="language">
+					<label >
+						Thailand
+					</label>
+				</div>
+				<div class="">
+					<input class="radio" type="radio" value="es" name="language">
+					<label >
+						Bangkok
 					</label>
 				</div>
 			</div>
-		</div>
+      </div>					
+
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Date
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+       
+      </div>
+    </div>
+  </div><button class="btn btn-primary submit" type="button" ng-click="">Filter</button>
+</div>
 	</div>
 	<div class=" col-lg-5">
 		<div class="result" ng-repeat="result in slicedResults track by $index">
-			<div class="username">@{{result["user.screen_name"][0]}}</div>
-			<div class="target-url" ng-click="openUrl(result)">{{result["entities.urls.url"][0]}}</div>
+			<div class="username" ng-click="gotoUser(result)">@{{result.user_name[0]}}</div>
+			<div class="target-url" ng-click="openUrl(result)">https://twitter.com/{{result.user_name[0]}}/status/{{result.tweet_id[0]}}</div>
 			<div class="text">
 				{{result.text_en}}
 				{{result.text_th}}

@@ -22,12 +22,16 @@ angular.module('myApp.view2', ['ngRoute'])
     $scope.openUrl = openUrl;
     $scope.setPage = setPage;
     $scope.gotoUser = gotoUser;
+
+    var script_ip = "68.133.35.155";
+    var script_port = "5000";
+
     // On load
     fetchTweets();
 
     function fetchTweets(){
       $http({
-        url: "http://localhost:5000/query/" + $scope.searchInput,
+        url: "http://" + script_ip + ":" + script_port + "/query/" + $scope.searchInput,
         method: "GET",
         headers: {"Content-Type": "application/json"}
       })
@@ -57,7 +61,7 @@ angular.module('myApp.view2', ['ngRoute'])
     }
 
     function openUrl(tweet) {
-      var url = tweet["entities.urls.url"][0];
+      var url = "https://twitter.com/" + tweet.user_name[0] + "/status/" + tweet.tweet_id[0];
       $window.open(url, '_blank');
     }
 	
