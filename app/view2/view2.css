@@ -7,6 +7,9 @@
     width: 200px;
     cursor: pointer;
 }
+.search-header form {
+    display: inline;
+}
 .search-header .input {
     width: 35%;
     max-width: 425px;
@@ -21,15 +24,17 @@
 }
 
 
-.filter .title {
+.filter-title {
     font-size: 120%;
-    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.filter-buttons {
+    margin-top: 5px;
+    text-align: center;
 }
 
-
- .result {
-   
-}
 .result .username  {
     color: #1a0dab;
     font-size:18px;
@@ -47,6 +52,11 @@
     color:#545454;
     font-size: small;
     margin-bottom: 4%;
+}
+
+.zero-results {
+    text-align: center;
+    margin-top: 15px;
 }
 
 .spinner {
