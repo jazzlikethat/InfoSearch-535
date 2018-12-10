@@ -54,7 +54,9 @@ angular.module('myApp.view3', ['ngRoute'])
           ['Mexico', $scope.searchResults.countries.mexico]
         ]);
 
-        var options = {};
+        var options = {
+          title: 'Distribution of tweets by location'
+        };
 
         var chart = new google.visualization.GeoChart(document.getElementById('chart_div1'));
 
