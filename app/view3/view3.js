@@ -68,8 +68,8 @@ angular.module('myApp.view3', ['ngRoute'])
           ["Language", "Tweets (in %)"],
           ["French", $scope.searchResults.languages.fr],
           ["English", $scope.searchResults.languages.en],
-          ["Hindi", $scope.searchResults.languages.th],
-          ["Thai", $scope.searchResults.languages.hi],
+          ["Hindi", $scope.searchResults.languages.hi],
+          ["Thai", $scope.searchResults.languages.th],
           ["Spanish", $scope.searchResults.languages.es]
         ]);
   
