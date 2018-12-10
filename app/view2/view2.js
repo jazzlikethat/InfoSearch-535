@@ -58,6 +58,13 @@ angular.module('myApp.view2', ['ngRoute'])
         tempTweets = angular.copy($scope.searchResults.tweets);
         $scope.setPage(1);
         $scope.hideSpinner = true;
+      })
+      .catch(function(){
+        $scope.searchResults = {
+          tweets: []
+        };
+        $scope.setPage(1);
+        $scope.hideSpinner = true;
       });
     }
 

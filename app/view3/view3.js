@@ -134,6 +134,18 @@ angular.module('myApp.view3', ['ngRoute'])
         var chart = new google.visualization.WordTree(document.getElementById('chart_div4'));
         chart.draw(data, options);
       }
+
+      var completeTweetText = getTweetText();
+      function getTweetText() {
+        var text = "";
+        for (var i = 0; i < $scope.searchResults.tweets.length; i++) {
+          var entry = $scope.searchResults.tweets[i];
+          var lang = entry.tweet_lang[0];
+          text += entry['text_' + lang];
+        }
+        debugger;
+        return text;
+      }
  
 }]);
 
