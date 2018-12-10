@@ -63,7 +63,7 @@ angular.module('myApp.view3', ['ngRoute'])
 
       function drawLanguageBarChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Language", "Tweets Count"],
+          ["Language", "Tweets (in %)"],
           ["French", $scope.searchResults.languages.fr],
           ["English", $scope.searchResults.languages.en],
           ["Hindi", $scope.searchResults.languages.th],
@@ -74,7 +74,7 @@ angular.module('myApp.view3', ['ngRoute'])
         var options = {
           title: 'Distribution of tweets by language',
           hAxis: {
-            title: 'Total Tweets',
+            title: 'Total Tweets by percentage',
             minValue: 0
           },
           vAxis: {
@@ -87,7 +87,7 @@ angular.module('myApp.view3', ['ngRoute'])
 
       function drawEmotionsChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Emotion", "Tweets Count"],
+          ["Emotion", "Tweets (in %)"],
           ["Negative", $scope.searchResults.sentiments.overall_sentiment.neg],
           ["Neutral", $scope.searchResults.sentiments.overall_sentiment.neu],
           ["Positive", $scope.searchResults.sentiments.overall_sentiment.pos]
@@ -96,7 +96,7 @@ angular.module('myApp.view3', ['ngRoute'])
         var options = {
           title: 'Distribution of tweets by Emotion',
           hAxis: {
-            title: 'Total Tweets',
+            title: 'Total Tweets by percentage',
             minValue: 0
           },
           vAxis: {
